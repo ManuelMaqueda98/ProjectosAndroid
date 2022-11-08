@@ -7,9 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import {Text, StyleSheet,TextInput,Button,View, Image} from "react-native";
-import splitLayoutProps from 'react-native/Libraries/StyleSheet/splitLayoutProps';
-
+import {Text, StyleSheet,TextInput,Switch,Button,View, Image} from "react-native";
 //const name = "Antonio J";
 export default function App()
 {
@@ -34,6 +32,7 @@ export default function App()
   const [name, setName] = useState("Cesur"); // Ejemplo para textos
   const [count, setCount] = useState(true); //Ejemplo para contar
   const [count2, setCount2] =useState(true);
+  const [isEnabled, setIsEnabled] = useState(false);
   //#endregion
   //#region Style
   const styles =StyleSheet.create
@@ -141,23 +140,34 @@ export default function App()
   //#endregion
   return(
   <View style={styles.container}> 
-  <Image
-
-style={styles.myImageStyle}
-
-source={{
-
-    uri: "https://images.wikidexcdn.net/mwuploads/wikidex/0/02/latest/20090125150654/Pok%C3%A9_Ball_%28Ilustraci%C3%B3n%29.png"
-
-}}/>
-  
+    <Switch
+      trackColor ={{false: 'green', true: 'yellow'}}
+      thumbColor ={isEnabled?'blue':'red'}
+      onValueChange = {() => setIsEnabled(previousState => !previousState)}
+      value ={isEnabled}
+    />
+    {isEnabled?  
+     <Image style={styles.myImageStyle}
+        source={
+        {
+         uri:"https://images.wikidexcdn.net/mwuploads/wikidex/c/cb/latest/20220227153601/Fuecoco.png"
+        }
+      }/>
+    :
+      <Image style={styles.myImageStyle}
+        source={
+        {
+         uri: "https://images.wikidexcdn.net/mwuploads/wikidex/0/02/latest/20090125150654/Pok%C3%A9_Ball_%28Ilustraci%C3%B3n%29.png"
+        }
+      }/> 
+    } 
   </View>);
   
 }
 
 //#region Dentro del Return App
 /*
- //Ejemplo para que cada boton tenga un estilo predeterminado
+ Ejemplo para que cada boton tenga un estilo predeterminado
    <View style ={styles.containerButton}>
     <Button onPress={() =>{setCount(0), setCount2(0)}} title ={"Resetea"}/> 
     </View>
@@ -170,9 +180,9 @@ source={{
     <View style ={styles.containerButton}>
     <Button onPress={() =>{setCount2(count2 +10)}} title ={"Cuenta 10"}/>   
     </View>
-  //Ejemplo para que cada boton tenga un estilo predeterminado
+  Ejemplo para que cada boton tenga un estilo predeterminado
 
-  //Crear un texto donde escribir
+  Crear un texto donde escribir
    <TextInput
        style={{
          height: 40,
@@ -181,7 +191,7 @@ source={{
        }}
        defaultValue ="Escriba su nombre aqui.."
      />
-  //Crear un texto donde escribir  
+  Crear un texto donde escribir  
 
      <Dog name = "Timon"/>
      <Dog name = "Chufi"/>
@@ -197,9 +207,24 @@ source={{
        onChangeText = {edad => setEdad(edad)}
        />
   <Button onPress={() =>{validateEdad(edad); ComprobarEdad}} title = {"Finalizar"}/>
-  Ejercicio de preguntar edad introduciendo un numero, este no permite caracteres alfabeticos
 
   <Text>{tEdad}</Text>
+  Ejercicio de preguntar edad introduciendo un numero, este no permite caracteres alfabeticos
+
+  Imagenes
+    <Image style={styles.myImageStyle}
+      source={
+        {
+         uri: "https://images.wikidexcdn.net/mwuploads/wikidex/0/02/latest/20090125150654/Pok%C3%A9_Ball_%28Ilustraci%C3%B3n%29.png"
+        }
+    }/>
+
+    <Image style={styles.myImageStyle}
+      source={
+       {
+        uri: "https://images.wikidexcdn.net/mwuploads/wikidex/c/cb/latest/20220227153601/Fuecoco.png"
+       }
+    }/>
 */
 //#endregion
 
