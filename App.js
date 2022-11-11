@@ -26,7 +26,7 @@ export default function App()
         borderWidth:1,
         borderColor: "Black", 
         width: 250, 
-        margin: 20,
+        margin: 10,
         heigh: 20
       },
       row:
@@ -45,15 +45,105 @@ export default function App()
       },
       styleButton:
       {
-        width:300,
-        height:300,
+        width:100,
+        height:100,
         alignSelf: 'center',
-        margin:20
+        margin:10
+      },
+      myImageStyle:
+      {
+          width:200,
+          height:200,
+          margin: 10,
+          alignSelf: 'center',
       }
     }
   );
   //#endregion
+ //#region ValidarDatos
+
+  //#endregion
+ const [nombre, setNombre] = useState('');
+ const [apellidos, setApellidos] = useState('');
+ const [edad, setEdad] = useState('');
+ const [email, setEmail] = useState('');
  const [sex, setSex] = useState(false);
+ const [text, setText] = useState('');
+
+  function ComprobarDatos ()
+  {
+     const regex = /^[a-zA-Z]+$/;
+     const boolName = (!nombre.match(regex))?false:true
+     const boolApellidos = (!apellidos.match(regex))?false:true
+     const boolEmail = (!email.includes('@'))?false:true
+     const boolEdad = (!edad.match(regex))?false:true
+     if(boolName && boolApellidos && boolEmail && !boolEdad)
+     {
+        setText(<Text>Hola  {nombre} {apellidos} tu sexo es: <Text>{sex?"Masculino":"Femenino"}</Text> tienes {edad} y tu e-mail es: {email}</Text>)
+     }
+     else if(!boolName && boolApellidos && boolEmail && !boolEdad)
+     {
+        setText(<Text>¡Error en nombre!</Text>)
+     }
+     else if(boolName && !boolApellidos && boolEmail && !boolEdad)
+     {
+        setText(<Text>¡Error en apellidos!</Text>)
+     }
+     else if(boolName && boolApellidos && !boolEmail && !boolEdad)
+     {
+        setText(<Text>¡Error en email!</Text>)
+     }
+     else if(boolName && boolApellidos && boolEmail && boolEdad)
+     {
+      setText(<Text>¡Error en la edad!</Text>)
+     }
+     else if(!boolName && !boolApellidos && boolEmail && !boolEdad)
+     {
+        setText(<Text>¡Error 2 campos! Nombre y apellidos</Text>)
+     }
+     else if(!boolName && boolApellidos && boolEmail && boolEdad)
+     {
+        setText(<Text>¡Error 2 campos! Nombre y edad</Text>)
+     }
+     else if(!boolName && boolApellidos && !boolEmail && !boolEdad)
+     {
+        setText(<Text>¡Error 2 campos! Nombre y e-mail</Text>)
+     }
+     else if(boolName && !boolApellidos && !boolEmail && !boolEdad)
+     {
+        setText(<Text>¡Error 2 campos! Apellidos y e-mail</Text>)
+     }
+     else if(boolName && boolApellidos && !boolEmail && boolEdad)
+     {
+        setText(<Text>¡Error 2 campos! Edad y e-mail</Text>)
+     }
+     else if(boolName && !boolApellidos && boolEmail && boolEdad)
+     {
+        setText(<Text>¡Error 2 campos! Apellidos y edad</Text>)
+     }
+     else if(!boolName && !boolApellidos && !boolEmail && !boolEdad)
+     {
+        setText(<Text>"¡Error 3 campos! Nombre, apellidos y email"</Text>)
+     }
+     else if(!boolName && !boolApellidos && boolEmail && !boolEdad)
+     {
+        setText(<Text>"¡Error 3 campos! Nombre, apellidos y edad"</Text>)
+     }
+     else if(boolName && !boolApellidos && !boolEmail && boolEdad)
+     {
+        setText(<Text>"¡Error 3 campos! Apellidos, email y edad"</Text>)
+     }
+     else if(!boolName && boolApellidos && !boolEmail && boolEdad)
+     {
+        setText(<Text>"¡Error 3 campos! Nombre,edad y email"</Text>)
+     }
+     else if(!boolName && !boolApellidos && !boolEmail && boolEdad)
+     {
+        setText(<Text>"¡Error en todos los campo!"</Text>)
+     }
+
+  }
+
   return(
   <View style={styles.container}> 
    <View style={styles.row}>
@@ -62,6 +152,7 @@ export default function App()
    defaultValue=''
    placeholder='Escriba aqui su nombre...'
    style={styles.styleTInput}
+   onChangeText = {nombre=> setNombre(nombre)}
    />
    </View>
 
@@ -71,6 +162,7 @@ export default function App()
    defaultValue=''
    placeholder='Escriba aqui su Apellidos...'
    style={styles.styleTInput}
+   onChangeText = {apellidos => setApellidos(apellidos)}
    />
    </View>
 
@@ -80,6 +172,7 @@ export default function App()
    defaultValue=''
    placeholder='Escriba aqui su edad...'
    style={styles.styleTInput}
+   onChangeText = {edad => setEdad(edad)}
    />
    </View>
 
@@ -89,8 +182,10 @@ export default function App()
    defaultValue=''
    placeholder='Escriba aqui su Correo electronico...'
    style={styles.styleTInput}
+   onChangeText = {email => setEmail(email)}
    />
    </View>
+   
   <View style={styles.row}>
   <Switch
     trackColor={{false:'pink', true:'blue'}}
@@ -100,10 +195,28 @@ export default function App()
    />
    <Text style={{margin:20}}>{sex?"Masculino":"Femenino"}</Text>
   </View>
+
+ 
   <View style={styles.styleButton}>
-  <Button title='Enviar'/>
+  <Button  title='Enviar' onPress={() => ComprobarDatos(edad)}/>
+  </View>
+
+  <View style={{alignSelf: 'center',}}>
+  <Text>{text}</Text> 
+  </View>
+
+  <View>
+  <Image style={styles.myImageStyle}
+      source={
+        {
+         uri: "https://images.wikidexcdn.net/mwuploads/wikidex/0/02/latest/20090125150654/Pok%C3%A9_Ball_%28Ilustraci%C3%B3n%29.png"
+        }
+    }/>
   </View>
   </View>);
+
+
+
   
 }
 
