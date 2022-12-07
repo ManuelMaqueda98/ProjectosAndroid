@@ -1,0 +1,114 @@
+import React, { useState } from 'react';
+import { SwitchText, TextInput, Image, View, StyleSheet, Button, ScrollView, Text } from 'react-native';
+
+
+
+
+export default function App(){
+    
+return(
+    <ScrollView>
+        <View>
+    <Text>hola</Text>
+    
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text><Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text><Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    <Text>hola</Text>
+    </View>
+    </ScrollView>
+    )
+}
