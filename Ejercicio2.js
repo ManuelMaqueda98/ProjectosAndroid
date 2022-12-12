@@ -20,7 +20,9 @@ function ListadoScreen({navigation}) {
             onPress={() => navigation.navigate('UserScreen',{item})} />
             
         </View>
+
     )
+      
   return (
     <View>
             <FlatList
@@ -33,6 +35,8 @@ function ListadoScreen({navigation}) {
   );
 }
 
+
+
 function InfoScreen({navigation}) {
   return(
     <View><Text style={{textAlign: 'center', justifyContent: 'center' }}>Esta App te permite conocer 
@@ -40,12 +44,16 @@ function InfoScreen({navigation}) {
   )
 }
 
-function DetalleScreen({navigation,item}){
-    return(
+function DetalleScreen({route}){
+  const {item} = route.params;  
+  return(
       
-      <Text>
-          {}
-      </Text>
+      <View style = {{flex : 1 ,alignItems : 'flex-start' ,justifyContent : 'center', marginLeft : 50}}>
+        <Text>Nombre : {item.Nombre}</Text>
+        <Text>Apellidos : {item.Apellidos}</Text>
+        <Text>Edad : {item.Edad}</Text>
+        
+      </View>
         
            
     )
