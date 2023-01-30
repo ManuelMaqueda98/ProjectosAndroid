@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
-import { RefreshControl, Text, ScrollView, StyleSheet, FlatList } from 'react-native';
+import { RefreshControl, Text, FlatList, View, Image } from 'react-native';
 
 const wait = (timeout) => {
     return new Promise(resolve =>{
@@ -18,7 +17,7 @@ export default function MarketScreen(){
     },[]);
 
     useEffect(() => {
-        fetch("http://192.168.137.1/fruits")
+        fetch("http://10.88.3.197:8080/fruits")
         .then(response => response.json())
         .then((responseJson) => {
             console.log('getting data from fetch', responseJson);
@@ -29,19 +28,44 @@ export default function MarketScreen(){
 
     const renderItem= ({item})=>{
         return(
-        <Text>{item.id} {item.name} {item.price}</Text>
-    )
-}
+            <View>
+        <Text style={{
+            color:'blue',
+            shadowColor:'black',
+            fontSize:18,
+            textAlign:'center'
+
+
+        }}>{item.name} Precio: {item.price}</Text>
+        <Image style={{
+        height: 450,
+        width: 415
+      }}
+        source={item.name==='piña'?require('../img/piña.jpg'):item.name==='pera'?require('../img/pera.jpg'):item.name==='melocoton'?require('../img/melocoton.jpg')
+        :item.name==='manzana'?require('../img/manzana.jpg'):item.name==='uva'?require('../img/uva.jpg'):item.name==='naranja'?require('../img/naranja.jpg'):
+        item.name==='kiwi'?require('../img/kiwi.jpg'):require('../img/platano.jpg')} />
+    </View>
+      )
+    }
+       
+        
+        
+        
+
     
 
     return(
-       
+       <View>
+        
+      
             
-            <FlatList
+            <FlatList refreshControl={
+                <RefreshControl refreshing={refreshing}onRefresh={onRefresh}/>
+            }
             data={fruits}
             renderItem={renderItem}
             keyExtractor={item=>item.id}
             />
-            
+             </View>
     )
 }

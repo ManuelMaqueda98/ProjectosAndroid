@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text,TouchableOpacity, StyleSheet, Button } from 'react-native'
 
-export function Boton(props) {
+export function BotonPers(props) {
 
     const{onPress}=props
     const styles= StyleSheet.create({

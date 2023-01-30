@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { BottomTabBar, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AddFruits from '../ProjectosAndroid/src/components/AddFruits';
 import MarketScreen from '../ProjectosAndroid/src/components/MarketScreen';
@@ -28,11 +28,13 @@ export default function Api(){
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
                 tabBarActiveTintColor: 'blue',
-                tabBarInactiveTintColor: 'white',
+                tabBarInactiveTintColor: 'black',
             })}
             >
+                
                 <BTAB.Screen name="Market" component={MarketScreen} />
                 <BTAB.Screen name="Fruits" component={AddFruits} />
+                
             </BTAB.Navigator>
         </NavigationContainer>
     );

@@ -1,42 +1,71 @@
-import React, { useEffect, useState } from 'react';
-import { Button,RefreshControl, Text, ScrollView, StyleSheet, TextInput } from 'react-native';
-import BotonPers from './BotonPers';
+import React, { useState } from 'react';
+import {Text, TextInput, View } from 'react-native';
+import {BotonPers} from './BotonPers';
 
-const wait = (timeout) => {
-    return new Promise(resolve => {
-        setTimeout(resolve, timeout);
-    });
-}
+
 
 export default function MarketScreen(){
-    const [fruits,setFruits] = useState(null);
-    const [refreshing,setRefreshing] = useState(false);
-    const [nombre, setNombre] = useState(null);
-    const [precio, setPrecio] = useState(null);
+  
+    const [nombre, setNombre] = useState();
+    const [validateNombre, setValidateNombre]=useState(false);
+    const [precio, setPrecio] = useState();
+    const [validatePrecio, setValidatePrecio]=useState(false);
 
-    const onRefresh = React.useCallback(() => {
-        setRefreshing(true);
-        wait(2000).then(() => setRefreshing(false));
-    }, []);
+    function setNombreFruta(nombre){
+        const re= /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
 
-    function post(){
-        let data ={
-            method:'POST',
-            Headers:{
-                'Accept' : 'application/json',
-                'Conten-Type':'application/json',
-            },
-            body: JSON.stringify({
-                name: nombre,
-                price: precio
-            }),
-        };
-        return fetch("http://192.168.137.1/fruits", data)
+        if(re.test(nombre)){
+            setValidateNombre(true);
+        }else{
+            setValidateNombre(false);
+        }setNombre(nombre);
+
     }
 
+    function setPrecioFruta(precio){
+        const re= /^\d+(\.\d{1,2})?$/;
+
+        if(re.test(precio)){
+            setValidatePrecio(true);
+        }else{
+            setValidatePrecio(false);
+        }setPrecio(precio);
+    }
+
+    function comprobar(){
+        if(validateNombre && validatePrecio){
+            post();
+        }
+    }
+
+    function post(){
+       
+        fetch('http://10.88.3.197:8080/fruits', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstParam: nombre,
+                secondParam: precio,
+            }),
+        
+        })
+            .then((response) => response.json())
+            .then((responseData) => {
+                console.log(
+                    "POST Response",
+                    "Response Body -> " + JSON.stringify(responseData)
+                )
+                }).catch()
+            
+    }
+
+
     return(
-        <ScrollView>
-            <Text style={{textAlign: 'center', fontSize: 17}}>Add fruits</Text>
+            <View>
+            <Text style={{textAlign: 'center', fontSize: 17,textShadowColor:'black', color:'blue' }}>Add fruits</Text>
             <TextInput style={{
                 alignSelf:'center',
                 marginBottom:25,
@@ -49,8 +78,9 @@ export default function MarketScreen(){
                 fontSize:15,
                 borderColor: 'F1A999'
             }}
-            placeholder="Name"
-            onChangeText={nombre => setNombre(nombre)}/>
+            placeholder="   Name"
+            value={nombre}
+            onChangeText={nombre => setNombreFruta(nombre)}/>
             <TextInput
             style={{
                 alignSelf:'center',
@@ -63,10 +93,14 @@ export default function MarketScreen(){
                 fontSize:15,
                 borderColor: 'F1A999'
             }}
-            placeholder="Price"
-            onChangeText={precio => setprecio(precio)} />
+            placeholder="   Price"
+            value={precio}
+            onChangeText={precio => setPrecioFruta(precio)}/>
+            
+          
 
-            <BotonPers onPress={post} />
-        </ScrollView>
+            <BotonPers onPress={()=> comprobar()}/>
+            </View>
+        
     )
 }
